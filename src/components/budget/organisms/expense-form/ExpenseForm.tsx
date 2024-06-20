@@ -1,12 +1,12 @@
-import { Formik, Form } from "formik";
-import { object, string, number } from "yup";
-import { EntryFrequency } from "@/models/entry";
-import { useCreateBudgetEntryMutation } from "@/services/base";
-import FormLabel from "@components/shared/atoms/form-label/FormLabel";
-import { FormError } from "@components/shared/atoms/form-label/styles";
-import AlertCallout from "@components/shared/atoms/alert-callout/AlertCallout";
-import Loader from "@components/shared/atoms/loader/Loader";
-import { InfoCircledIcon } from "@radix-ui/react-icons";
+import { Formik, Form } from 'formik';
+import { object, string, number } from 'yup';
+import { EntryFrequency } from '@/models/entry';
+import { useCreateBudgetEntryMutation } from '@/services/base';
+import FormLabel from '@components/shared/atoms/form-label/FormLabel';
+import { FormError } from '@components/shared/atoms/form-label/styles';
+import AlertCallout from '@components/shared/atoms/alert-callout/AlertCallout';
+import Loader from '@components/shared/atoms/loader/Loader';
+import { InfoCircledIcon } from '@radix-ui/react-icons';
 import {
   Card,
   Heading,
@@ -14,8 +14,8 @@ import {
   TextField,
   Select,
   Button,
-} from "@radix-ui/themes";
-import strings from "@/locals/en";
+} from '@radix-ui/themes';
+import strings from '@/locals/en';
 
 const {
   global: { amount, category, dueDate, frequency, name, paymentMethod, save },
@@ -48,12 +48,12 @@ const ExpenseForm = () => {
   const [createEntry, { isLoading }] = useCreateBudgetEntryMutation();
 
   const initialValues: FormValues = {
-    name: "",
+    name: '',
     amount: 0.0,
-    category: "",
+    category: '',
     frequency: EntryFrequency.Monthly,
-    dueDate: "",
-    paymentMethod: "",
+    dueDate: '',
+    paymentMethod: '',
   };
 
   const validationSchema = object({
@@ -138,7 +138,7 @@ const ExpenseForm = () => {
                   name="category"
                   value={values.category}
                   onValueChange={(value) => {
-                    setFieldValue("category", value, true);
+                    setFieldValue('category', value, true);
                   }}
                 >
                   <Select.Trigger radius="large" placeholder="Select" />
@@ -160,7 +160,7 @@ const ExpenseForm = () => {
                   name="frequency"
                   value={values.frequency}
                   onValueChange={(value) => {
-                    setFieldValue("frequency", value, true);
+                    setFieldValue('frequency', value, true);
                   }}
                 >
                   <Select.Trigger radius="large" placeholder="Select" />
@@ -198,7 +198,7 @@ const ExpenseForm = () => {
                   name="paymentMethod"
                   value={values.paymentMethod}
                   onValueChange={(value) => {
-                    setFieldValue("paymentMethod", value, true);
+                    setFieldValue('paymentMethod', value, true);
                   }}
                 >
                   <Select.Trigger radius="large" placeholder="Select" />
