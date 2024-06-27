@@ -1,8 +1,8 @@
-import { useGetBudgetEntriesQuery } from "@/services/base";
-import CategoriesWidget from "@components/shared/organisms/categories-widget/CategoriesWidget";
-import EmptyState from "@components/shared/atoms/empty-state/EmptyState";
-import { Card, Skeleton } from "@radix-ui/themes";
-import strings from "@/locals/en";
+import { useGetBudgetEntriesQuery } from '@/services/base';
+import CategoriesWidget from '@/components/organisms/categories-widget/CategoriesWidget';
+import EmptyState from '@/components/atoms/empty-state/EmptyState';
+import { Card, Skeleton } from '@radix-ui/themes';
+import strings from '@/locals/en';
 
 const {
   budget: { budget },

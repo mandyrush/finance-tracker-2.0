@@ -1,14 +1,14 @@
-import { useGetBudgetEntriesQuery } from "@/services/base";
-import CategoryEntriesTable from "@components/shared/organisms/category-entries-table/CategoryEntriesTable";
-import ExpenseForm from "@components/budget/organisms/expense-form/ExpenseForm";
-import CategoryForm from "@components/budget/organisms/category-form/CategoryForm";
-import PaymentMethodForm from "@components/budget/organisms/payment-method-form/PaymentMethodForm";
-import FrequencyForm from "@components/budget/organisms/frequency-form/FrequencyForm";
-import EmptyState from "@components/shared/atoms/empty-state/EmptyState";
-import Loader from "@components/shared/atoms/loader/Loader";
-import AlertCallout from "@components/shared/atoms/alert-callout/AlertCallout";
-import { Container, Flex, Box, Heading } from "@radix-ui/themes";
-import strings from "@/locals/en";
+import { useGetBudgetEntriesQuery } from '@/services/base';
+import CategoryEntriesTable from '@components/organisms/category-entries-table/CategoryEntriesTable';
+import ExpenseForm from '@/components/organisms/expense-form/ExpenseForm';
+import CategoryForm from '@components/organisms/category-form/CategoryForm';
+import PaymentMethodForm from '@/components/organisms/payment-method-form/PaymentMethodForm';
+import FrequencyForm from '@/components/organisms/frequency-form/FrequencyForm';
+import EmptyState from '@/components/atoms/empty-state/EmptyState';
+import Loader from '@/components/atoms/loader/Loader';
+import AlertCallout from '@components/atoms/alert-callout/AlertCallout';
+import { Container, Flex, Box, Heading } from '@radix-ui/themes';
+import strings from '@/locals/en';
 
 const {
   budget: {

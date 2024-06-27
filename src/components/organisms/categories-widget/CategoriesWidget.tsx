@@ -1,16 +1,16 @@
-import { useMemo } from "react";
-import { NavLink } from "react-router-dom";
-import { Entry as EntryModel } from "models/entry";
-import { capitalizeFirstLetter } from "@/utilities/helpers";
-import strings from "@/locals/en";
-import Entry from "@components/shared/atoms/entry/Entry";
-import { Heading, Flex } from "@radix-ui/themes";
+import { useMemo } from 'react';
+import { NavLink } from 'react-router-dom';
+import { Entry as EntryModel } from 'models/entry';
+import { capitalizeFirstLetter } from '@/utilities/helpers';
+import strings from '@/locals/en';
+import Entry from '@/components/atoms/entry/Entry';
+import { Heading, Flex } from '@radix-ui/themes';
 import {
   WidgetContainer,
   WidgetHeader,
   WidgetBody,
   WidgetFooter,
-} from "./styles";
+} from './styles';
 
 const {
   global: { total: totalLabel, view },

@@ -6,9 +6,9 @@ import {
   useGetBudgetCategoriesQuery,
   useCreateBudgetEntryMutation,
 } from '@/services/base';
-import FormLabel from '@components/shared/atoms/form-label/FormLabel';
-import { FormError } from '@components/shared/atoms/form-label/styles';
-import AlertCallout from '@components/shared/atoms/alert-callout/AlertCallout';
+import FormLabel from '@/components/atoms/form-label/FormLabel';
+import { FormError } from '@/components/atoms/form-label/styles';
+import AlertCallout from '@components/atoms/alert-callout/AlertCallout';
 import { InfoCircledIcon } from '@radix-ui/react-icons';
 import {
   Card,

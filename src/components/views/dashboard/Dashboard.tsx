@@ -1,7 +1,7 @@
-import BudgetOverview from "@components/budget/views/budget-overview/BudgetOverview";
-import strings from "@/locals/en";
-import { Grid, Flex, Box, Heading } from "@radix-ui/themes";
-import { MainContainer } from "./styles";
+import BudgetOverview from '@/components/views/budget-overview/BudgetOverview';
+import strings from '@/locals/en';
+import { Grid, Flex, Box, Heading } from '@radix-ui/themes';
+import { MainContainer } from './styles';
 
 const {
   global: { dashboard },

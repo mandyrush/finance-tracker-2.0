@@ -2,7 +2,7 @@ import { expect, test } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
-import CategoriesWidget from '../components/shared/organisms/categories-widget/CategoriesWidget';
+import CategoriesWidget from '../components/organisms/categories-widget/CategoriesWidget';
 import { Entry, EntryType, EntryFrequency } from '../models/entry';
 
 const widgetTitle = 'Budget';

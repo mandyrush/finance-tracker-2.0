@@ -1,10 +1,10 @@
-import { useCallback, useMemo } from "react";
-import { Entry } from "@/models/entry";
-import { formatToCurrency } from "@/utilities/helpers";
-import CategoryEntryRows from "@components/shared/molecules/category-entry-rows/CategoryEntryRows";
-import { Table, Strong } from "@radix-ui/themes";
-import strings from "@/locals/en";
-import { RowTotal } from "./styles";
+import { useCallback, useMemo } from 'react';
+import { Entry } from '@/models/entry';
+import { formatToCurrency } from '@/utilities/helpers';
+import CategoryEntryRows from '@/components/molecules/category-entry-rows/CategoryEntryRows';
+import { Table, Strong } from '@radix-ui/themes';
+import strings from '@/locals/en';
+import { RowTotal } from './styles';
 
 const {
   global: { actions, amount, grandTotal },
