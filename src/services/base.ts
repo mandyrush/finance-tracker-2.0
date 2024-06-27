@@ -1,16 +1,21 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { Entry, EntryType, EntriesApiTag } from "@/models/entry";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { Entry, EntryType, EntriesApiTag } from '@/models/entry';
+import { Category, CategoriesApiTag } from '@/models/category';
 
 export const baseApi = createApi({
-  reducerPath: "baseApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5173" }),
-  tagTypes: [EntriesApiTag.Entries],
+  reducerPath: 'baseApi',
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5173' }),
+  tagTypes: [EntriesApiTag.Entries, CategoriesApiTag.Categories],
   endpoints: (builder) => ({
     getBudgetEntries: builder.query<Entry[], void>({
-      query: () => "budget-entries",
+      query: () => 'budget-entries',
       providesTags: [EntriesApiTag.Entries],
     }),
-    createBudgetEntry: builder.mutation<void, Omit<Entry, "id" | "entryType">>({
+    getBudgetCategories: builder.query<Category[], void>({
+      query: () => 'budget-categories',
+      providesTags: [CategoriesApiTag.Categories],
+    }),
+    createBudgetEntry: builder.mutation<void, Omit<Entry, 'id' | 'entryType'>>({
       query: ({
         name,
         amount,
@@ -19,8 +24,8 @@ export const baseApi = createApi({
         dueDate,
         paymentMethod,
       }) => ({
-        url: "budget-entries",
-        method: "POST",
+        url: 'budget-entries',
+        method: 'POST',
         body: {
           name,
           amount,
@@ -33,8 +38,22 @@ export const baseApi = createApi({
       }),
       invalidatesTags: [EntriesApiTag.Entries],
     }),
+    createBudgetCategory: builder.mutation<void, Omit<Category, 'id'>>({
+      query: ({ category }) => ({
+        url: 'budget-categories',
+        method: 'POST',
+        body: {
+          category,
+        },
+      }),
+      invalidatesTags: [CategoriesApiTag.Categories],
+    }),
   }),
 });
 
-export const { useGetBudgetEntriesQuery, useCreateBudgetEntryMutation } =
-  baseApi;
+export const {
+  useGetBudgetEntriesQuery,
+  useGetBudgetCategoriesQuery,
+  useCreateBudgetEntryMutation,
+  useCreateBudgetCategoryMutation,
+} = baseApi;

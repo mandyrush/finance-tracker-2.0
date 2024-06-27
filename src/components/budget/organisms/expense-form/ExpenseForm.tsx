@@ -1,11 +1,14 @@
+import { useMemo } from 'react';
 import { Formik, Form } from 'formik';
 import { object, string, number } from 'yup';
 import { EntryFrequency } from '@/models/entry';
-import { useCreateBudgetEntryMutation } from '@/services/base';
+import {
+  useGetBudgetCategoriesQuery,
+  useCreateBudgetEntryMutation,
+} from '@/services/base';
 import FormLabel from '@components/shared/atoms/form-label/FormLabel';
 import { FormError } from '@components/shared/atoms/form-label/styles';
 import AlertCallout from '@components/shared/atoms/alert-callout/AlertCallout';
-import Loader from '@components/shared/atoms/loader/Loader';
 import { InfoCircledIcon } from '@radix-ui/react-icons';
 import {
   Card,
@@ -14,11 +17,21 @@ import {
   TextField,
   Select,
   Button,
+  Text,
 } from '@radix-ui/themes';
 import strings from '@/locals/en';
 
 const {
-  global: { amount, category, dueDate, frequency, name, paymentMethod, save },
+  global: {
+    amount,
+    category,
+    dueDate,
+    frequency,
+    loading,
+    name,
+    paymentMethod,
+    save,
+  },
   budget: {
     addExpense,
     callouts: { createBudgetEntryFailure, createBudgetEntrySuccess },
@@ -45,7 +58,18 @@ interface FormValues {
 }
 
 const ExpenseForm = () => {
+  const {
+    data: categories = [],
+    // error: isGetCategoriesError,
+    isLoading: isCategoriesLoading,
+  } = useGetBudgetCategoriesQuery();
   const [createEntry, { isLoading }] = useCreateBudgetEntryMutation();
+
+  const sortedCategories = useMemo(() => {
+    return [...categories]?.sort((a, b) =>
+      a.category.toLowerCase().localeCompare(b.category.toLowerCase())
+    );
+  }, [categories]);
 
   const initialValues: FormValues = {
     name: '',
@@ -70,8 +94,6 @@ const ExpenseForm = () => {
       <Heading as="h2" size="3">
         {addExpense}
       </Heading>
-
-      {isLoading && <Loader />}
 
       <Formik
         initialValues={initialValues}
@@ -99,7 +121,7 @@ const ExpenseForm = () => {
         }) => (
           <Form>
             <Flex direction="column" gap="3" maxWidth="300px">
-              <Flex direction="column">
+              <Flex direction="column" gap="1">
                 <FormLabel labelFor="name">{name}</FormLabel>
                 <TextField.Root
                   radius="large"
@@ -115,7 +137,7 @@ const ExpenseForm = () => {
                 ) : null}
               </Flex>
 
-              <Flex direction="column">
+              <Flex direction="column" gap="1">
                 <FormLabel labelFor="amount">{amount}</FormLabel>
                 <TextField.Root
                   radius="large"
@@ -131,7 +153,7 @@ const ExpenseForm = () => {
                 ) : null}
               </Flex>
 
-              <Flex direction="column">
+              <Flex direction="column" gap="1">
                 <FormLabel labelFor="category">{category}</FormLabel>
                 <Select.Root
                   size="2"
@@ -143,9 +165,17 @@ const ExpenseForm = () => {
                 >
                   <Select.Trigger radius="large" placeholder="Select" />
                   <Select.Content>
-                    <Select.Item value="car">Car</Select.Item>
-                    <Select.Item value="home">Home</Select.Item>
-                    <Select.Item value="technology">Technology</Select.Item>
+                    {isCategoriesLoading ? (
+                      <Select.Item value="loading">
+                        <Text>{loading}...</Text>
+                      </Select.Item>
+                    ) : (
+                      sortedCategories?.map(({ id, category }) => (
+                        <Select.Item key={id} value={category.toLowerCase()}>
+                          {category}
+                        </Select.Item>
+                      ))
+                    )}
                   </Select.Content>
                 </Select.Root>
                 {touched.category && errors.category ? (
@@ -153,7 +183,7 @@ const ExpenseForm = () => {
                 ) : null}
               </Flex>
 
-              <Flex direction="column">
+              <Flex direction="column" gap="1">
                 <FormLabel labelFor="frequency">{frequency}</FormLabel>
                 <Select.Root
                   size="2"
@@ -175,7 +205,7 @@ const ExpenseForm = () => {
                 ) : null}
               </Flex>
 
-              <Flex direction="column">
+              <Flex direction="column" gap="1">
                 <FormLabel labelFor="dueDate">{dueDate}</FormLabel>
                 <TextField.Root
                   radius="large"
@@ -191,7 +221,7 @@ const ExpenseForm = () => {
                 ) : null}
               </Flex>
 
-              <Flex direction="column">
+              <Flex direction="column" gap="1">
                 <FormLabel labelFor="paymentMethod">{paymentMethod}</FormLabel>
                 <Select.Root
                   size="2"
@@ -218,6 +248,7 @@ const ExpenseForm = () => {
                 variant="solid"
                 radius="large"
                 color="grass"
+                loading={isLoading}
               >
                 {save}
               </Button>

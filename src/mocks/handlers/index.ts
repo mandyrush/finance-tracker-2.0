@@ -1,3 +1,4 @@
-import { handlers as budgetEntriesHandlers } from './budgetEntries'
- 
-export const handlers = [...budgetEntriesHandlers];
+import { handlers as budgetEntriesHandlers } from './budgetEntries';
+import { handlers as budgetCategoriesHandlers } from './budgetCategories';
+
+export const handlers = [...budgetEntriesHandlers, ...budgetCategoriesHandlers];
