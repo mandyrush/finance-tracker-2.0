@@ -4,6 +4,7 @@ import { object, string, number } from 'yup';
 import { EntryFrequency } from '@/models/entry';
 import {
   useGetBudgetCategoriesQuery,
+  useGetPaymentMethodsQuery,
   useCreateBudgetEntryMutation,
 } from '@/services/base';
 import FormLabel from '@/components/atoms/form-label/FormLabel';
@@ -63,6 +64,13 @@ const ExpenseForm = () => {
     // error: isGetCategoriesError,
     isLoading: isCategoriesLoading,
   } = useGetBudgetCategoriesQuery();
+
+  const {
+    data: paymentMethods = [],
+    // error: isGetPaymentMethodsError,
+    isLoading: isPaymentMethodsLoading,
+  } = useGetPaymentMethodsQuery();
+
   const [createEntry, { isLoading }] = useCreateBudgetEntryMutation();
 
   const sortedCategories = useMemo(() => {
@@ -70,6 +78,12 @@ const ExpenseForm = () => {
       a.category.toLowerCase().localeCompare(b.category.toLowerCase())
     );
   }, [categories]);
+
+  const sortedPaymentMethods = useMemo(() => {
+    return [...paymentMethods]?.sort((a, b) =>
+      a.paymentMethod.toLowerCase().localeCompare(b.paymentMethod.toLowerCase())
+    );
+  }, [paymentMethods]);
 
   const initialValues: FormValues = {
     name: '',
@@ -233,9 +247,20 @@ const ExpenseForm = () => {
                 >
                   <Select.Trigger radius="large" placeholder="Select" />
                   <Select.Content>
-                    <Select.Item value="cc-1111">CC - 1111</Select.Item>
-                    <Select.Item value="cc-2222">CC - 2222</Select.Item>
-                    <Select.Item value="cc-3333">CC - 3333</Select.Item>
+                    {isPaymentMethodsLoading ? (
+                      <Select.Item value="loading">
+                        <Text>{loading}...</Text>
+                      </Select.Item>
+                    ) : (
+                      sortedPaymentMethods?.map(({ id, paymentMethod }) => (
+                        <Select.Item
+                          key={id}
+                          value={paymentMethod.toLowerCase()}
+                        >
+                          {paymentMethod}
+                        </Select.Item>
+                      ))
+                    )}
                   </Select.Content>
                 </Select.Root>
                 {touched.paymentMethod && errors.paymentMethod ? (

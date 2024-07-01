@@ -17,6 +17,7 @@ const strings = {
   budget: {
     addExpense: 'Add Expense',
     addCategory: 'Add Category',
+    addPaymentMethod: 'Add Payment Method',
     budget: 'Budget',
     budgetDetail: 'Budget Detail',
     callouts: {
@@ -26,6 +27,9 @@ const strings = {
       createCategoryFailure:
         'Failed to create category. Please refresh the page and try again.',
       createCategorySuccess: 'Category created.',
+      createPaymentMethodFailure:
+        'Failed to create payment method. Please refresh the page and try again.',
+      createPaymentMethodSuccess: 'Payment method created.',
       fetchBudgetDetailFail:
         'Failed to load the budget details, please refresh the page and try again.',
     },
@@ -42,6 +46,8 @@ const strings = {
       mustBeANumber: 'Must be a number.',
       mustBeThirtyCharacters: 'Must be 30 characters or less.',
       nameRequired: 'Please enter a name for this expense.',
+      paymentMethodExists: 'Payment method already exists.',
+      paymentMethodRequired: 'Please enter a payment method.',
       selectCategory: 'Please select a category.',
       selectFrequency: 'Please select a frequency.',
       selectPaymentMethod: 'Please select a payment method.',
