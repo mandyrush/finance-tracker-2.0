@@ -1,13 +1,12 @@
 import { Formik, Form } from 'formik';
-import { object, string } from 'yup';
+import { categoryFormvalidationSchema } from '@/models/validationSchema';
 import {
   useCreateBudgetCategoryMutation,
   useGetBudgetCategoriesQuery,
 } from '@/services/base';
-import FormLabel from '@/components/atoms/form-label/FormLabel';
-import { FormError } from '@/components/atoms/form-label/styles';
+import TextInput from '@/components/molecules/text-input/TextInput';
 import AlertCallout from '@components/atoms/alert-callout/AlertCallout';
-import { Card, Heading, Flex, TextField, Button } from '@radix-ui/themes';
+import { Card, Heading, Flex, Button } from '@radix-ui/themes';
 import { InfoCircledIcon } from '@radix-ui/react-icons';
 import strings from '@/locals/en';
 
@@ -16,7 +15,6 @@ const {
   budget: {
     addCategory,
     callouts: { createCategoryFailure, createCategorySuccess },
-    validation: { categoryExists, categoryRequired, mustBeThirtyCharacters },
   },
 } = strings;
 
@@ -32,18 +30,6 @@ const CategoryForm = () => {
     category: '',
   };
 
-  const validationSchema = object({
-    category: string()
-      .max(30, mustBeThirtyCharacters)
-      .required(categoryRequired)
-      .test(
-        'is unique',
-        categoryExists,
-        (value) =>
-          existingCategories.findIndex((cat) => cat.category === value) === -1
-      ),
-  });
-
   return (
     <Card>
       <Heading as="h2" size="3">
@@ -51,7 +37,7 @@ const CategoryForm = () => {
       </Heading>
       <Formik
         initialValues={initialValues}
-        validationSchema={validationSchema}
+        validationSchema={categoryFormvalidationSchema(existingCategories)}
         onSubmit={async (values, { resetForm }) => {
           try {
             await createCategory(values);
@@ -68,22 +54,17 @@ const CategoryForm = () => {
         {({ values, touched, errors, handleChange, handleBlur }) => (
           <Form>
             <Flex direction="column" gap="3" maxWidth="300px">
-              <Flex direction="column" gap="1">
-                <FormLabel labelFor="category">{category}</FormLabel>
-                <TextField.Root
-                  placeholder={category}
-                  radius="large"
-                  id="category"
-                  name="category"
-                  type="text"
-                  value={values.category}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {touched.category && errors.category ? (
-                  <FormError>{errors.category}</FormError>
-                ) : null}
-              </Flex>
+              <TextInput
+                name="category"
+                label={category}
+                type="text"
+                value={values.category}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                hasError={!!touched.category && !!errors.category}
+                error={errors.category || ''}
+              />
+
               <Button
                 type="submit"
                 variant="solid"

@@ -11,6 +11,7 @@ const strings = {
     name: 'Name',
     paymentMethod: 'Payment Method',
     save: 'Save',
+    select: 'Select',
     total: 'Total',
     view: 'View',
   },
