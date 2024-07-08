@@ -51,7 +51,7 @@ export const paymentMethodValidationSchema = (
   existingPaymentMethods: PaymentMethod[]
 ) => {
   return object({
-    category: string()
+    paymentMethod: string()
       .max(30, mustBeThirtyCharacters)
       .required(paymentMethodRequired)
       .test(
