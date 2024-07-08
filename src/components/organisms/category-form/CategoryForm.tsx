@@ -1,5 +1,5 @@
 import { Formik, Form } from 'formik';
-import { categoryFormvalidationSchema } from '@/models/validationSchema';
+import { categoryValidationSchema } from '@/models/validationSchema';
 import {
   useCreateBudgetCategoryMutation,
   useGetBudgetCategoriesQuery,
@@ -37,7 +37,7 @@ const CategoryForm = () => {
       </Heading>
       <Formik
         initialValues={initialValues}
-        validationSchema={categoryFormvalidationSchema(existingCategories)}
+        validationSchema={categoryValidationSchema(existingCategories)}
         onSubmit={async (values, { resetForm }) => {
           try {
             await createCategory(values);

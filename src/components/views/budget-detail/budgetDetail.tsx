@@ -3,7 +3,6 @@ import CategoryEntriesTable from '@components/organisms/category-entries-table/C
 import ExpenseForm from '@/components/organisms/expense-form/ExpenseForm';
 import CategoryForm from '@components/organisms/category-form/CategoryForm';
 import PaymentMethodForm from '@/components/organisms/payment-method-form/PaymentMethodForm';
-import FrequencyForm from '@/components/organisms/frequency-form/FrequencyForm';
 import EmptyState from '@/components/atoms/empty-state/EmptyState';
 import Loader from '@/components/atoms/loader/Loader';
 import AlertCallout from '@components/atoms/alert-callout/AlertCallout';
@@ -49,10 +48,6 @@ const BudgetDetail = () => {
 
               <Box>
                 <PaymentMethodForm />
-              </Box>
-
-              <Box>
-                <FrequencyForm />
               </Box>
             </Flex>
           </Box>

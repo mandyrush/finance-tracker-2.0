@@ -64,6 +64,10 @@ const ExpenseForm = () => {
     });
   }, [categories]);
 
+  const frequencyOptions = Object.entries(EntryFrequency).map(
+    ([key, value]) => ({ label: key, value: value.toLowerCase() })
+  );
+
   const paymentMethodOptions = useMemo(() => {
     return paymentMethods.map((method) => {
       return {
@@ -84,12 +88,6 @@ const ExpenseForm = () => {
       a.label.toLowerCase().localeCompare(b.label.toLowerCase())
     );
   }, [paymentMethodOptions]);
-
-  const sortedFrequencies = [
-    { label: 'Monthly', value: 'monthly' },
-    { label: 'Semi-Annual', value: 'semi-annual' },
-    { label: 'Yearly', value: 'yearly' },
-  ];
 
   const initialValues: FormValues = {
     name: '',
@@ -176,8 +174,7 @@ const ExpenseForm = () => {
                   setFieldValue('frequency', value, true);
                 }}
                 placeholder={select}
-                // isLoading={isFrequenciesLoading}
-                options={sortedFrequencies}
+                options={frequencyOptions}
                 hasError={!!touched.frequency && !!errors.frequency}
                 error={errors.frequency || ''}
               />

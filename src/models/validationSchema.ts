@@ -22,9 +22,7 @@ const {
   },
 } = strings;
 
-export const categoryFormvalidationSchema = (
-  existingCategories: Category[]
-) => {
+export const categoryValidationSchema = (existingCategories: Category[]) => {
   return object({
     category: string()
       .max(30, mustBeThirtyCharacters)
