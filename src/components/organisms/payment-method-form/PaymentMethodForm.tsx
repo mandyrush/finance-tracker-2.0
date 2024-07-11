@@ -11,7 +11,7 @@ import { InfoCircledIcon } from '@radix-ui/react-icons';
 import strings from '@/locals/en';
 
 const {
-  global: { paymentMethod, save },
+  global: { name, save },
   budget: {
     addPaymentMethod,
     callouts: { createPaymentMethodFailure, createPaymentMethodSuccess },
@@ -56,7 +56,7 @@ const PaymentMethodForm = () => {
             <Flex direction="column" gap="3" maxWidth="300px">
               <TextInput
                 name="paymentMethod"
-                label={paymentMethod}
+                label={name}
                 type="text"
                 value={values.paymentMethod}
                 onChange={handleChange}

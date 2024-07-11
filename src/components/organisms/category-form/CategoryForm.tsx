@@ -11,7 +11,7 @@ import { InfoCircledIcon } from '@radix-ui/react-icons';
 import strings from '@/locals/en';
 
 const {
-  global: { save, category },
+  global: { save, name },
   budget: {
     addCategory,
     callouts: { createCategoryFailure, createCategorySuccess },
@@ -56,7 +56,7 @@ const CategoryForm = () => {
             <Flex direction="column" gap="3" maxWidth="300px">
               <TextInput
                 name="category"
-                label={category}
+                label={name}
                 type="text"
                 value={values.category}
                 onChange={handleChange}

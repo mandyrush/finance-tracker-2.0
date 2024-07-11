@@ -57,7 +57,9 @@ const CategoryEntriesTable = ({ tableData }: CategoryEntriesTableProps) => {
         <Table.Row>
           <Table.ColumnHeaderCell>{item}</Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell>{amount}</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell>{actions}</Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell justify="center">
+            {actions}
+          </Table.ColumnHeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>

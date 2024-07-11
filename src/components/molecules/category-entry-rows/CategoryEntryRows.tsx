@@ -1,11 +1,18 @@
-import { Entry } from "@/models/entry";
-import { capitalizeFirstLetter, formatToCurrency } from "@/utilities/helpers";
-import strings from "@/locals/en";
-import { Table, Strong } from "@radix-ui/themes";
-import { RowHeader } from "./styles";
+import { Entry } from '@/models/entry';
+import { capitalizeFirstLetter, formatToCurrency } from '@/utilities/helpers';
+import strings from '@/locals/en';
+import {
+  Table,
+  Strong,
+  DropdownMenu,
+  IconButton,
+  Flex,
+} from '@radix-ui/themes';
+import { DotsHorizontalIcon } from '@radix-ui/react-icons';
+import { RowHeader } from './styles';
 
 const {
-  global: { actions, total },
+  global: { delete: deleteButton, edit, total },
 } = strings;
 
 interface CategoryEntryRowsProps {
@@ -31,7 +38,23 @@ const CategoryEntryRows = ({
         <Table.Row key={id}>
           <Table.RowHeaderCell>{name}</Table.RowHeaderCell>
           <Table.Cell justify="end">{formatToCurrency(amount)}</Table.Cell>
-          <Table.Cell>{actions}</Table.Cell>
+          <Table.Cell justify="center">
+            <DropdownMenu.Root>
+              <Flex height="100%" align="center" justify="center">
+                <DropdownMenu.Trigger>
+                  <IconButton variant="ghost">
+                    <DotsHorizontalIcon />
+                  </IconButton>
+                </DropdownMenu.Trigger>
+              </Flex>
+              <DropdownMenu.Content>
+                <DropdownMenu.Item onClick={() => {}}>{edit}</DropdownMenu.Item>
+                <DropdownMenu.Item onClick={() => {}}>
+                  {deleteButton}
+                </DropdownMenu.Item>
+              </DropdownMenu.Content>
+            </DropdownMenu.Root>
+          </Table.Cell>
         </Table.Row>
       ))}
 
