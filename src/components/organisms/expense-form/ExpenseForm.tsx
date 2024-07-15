@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Formik, Form } from 'formik';
-import { expenseFormValidationSchema } from '@/models/validationSchema';
 import { EntryFrequency } from '@/models/entry';
+import { expenseFormValidationSchema } from '@/models/validationSchema';
 import {
   useGetBudgetCategoriesQuery,
   useGetPaymentMethodsQuery,
@@ -58,8 +58,8 @@ const ExpenseForm = () => {
   const categoryOptions = useMemo(() => {
     return categories.map((category) => {
       return {
-        label: category.category,
-        value: category.category.toLowerCase(),
+        label: category.name,
+        value: category.id.toString(),
       };
     });
   }, [categories]);
@@ -71,8 +71,8 @@ const ExpenseForm = () => {
   const paymentMethodOptions = useMemo(() => {
     return paymentMethods.map((method) => {
       return {
-        label: method.paymentMethod,
-        value: method.paymentMethod.toLowerCase(),
+        label: method.name,
+        value: method.id.toString(),
       };
     });
   }, [paymentMethods]);

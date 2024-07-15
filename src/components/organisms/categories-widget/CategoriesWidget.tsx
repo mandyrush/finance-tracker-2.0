@@ -31,12 +31,12 @@ const CategoriesWidget = ({ title, entries }: CategoriesWidgetProps) => {
   const categoryEntries = useMemo(() => {
     return entries.reduce((accumulator, current) => {
       const categoryIndex = accumulator.findIndex(
-        (category) => category.label === current.category
+        (category) => category.label === current.category.name
       );
       if (categoryIndex === -1) {
         accumulator.push({
           id: current.id,
-          label: current.category,
+          label: current.category.name,
           value: current.amount,
         });
       } else {

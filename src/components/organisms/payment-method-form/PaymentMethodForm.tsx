@@ -19,7 +19,7 @@ const {
 } = strings;
 
 interface FormValues {
-  paymentMethod: string;
+  methodName: string;
 }
 
 const PaymentMethodForm = () => {
@@ -27,7 +27,7 @@ const PaymentMethodForm = () => {
   const [createPaymentMethod, { isLoading }] = useCreatePaymentMethodMutation();
 
   const initialValues: FormValues = {
-    paymentMethod: '',
+    methodName: '',
   };
 
   return (
@@ -40,7 +40,7 @@ const PaymentMethodForm = () => {
         validationSchema={paymentMethodValidationSchema(existingPaymentMethods)}
         onSubmit={async (values, { resetForm }) => {
           try {
-            await createPaymentMethod(values);
+            await createPaymentMethod({ name: values.methodName });
             <AlertCallout
               message={createPaymentMethodSuccess}
               icon={<InfoCircledIcon />}
@@ -55,14 +55,14 @@ const PaymentMethodForm = () => {
           <Form>
             <Flex direction="column" gap="3" maxWidth="300px">
               <TextInput
-                name="paymentMethod"
+                name="methodName"
                 label={name}
                 type="text"
-                value={values.paymentMethod}
+                value={values.methodName}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                hasError={!!touched.paymentMethod && !!errors.paymentMethod}
-                error={errors.paymentMethod || ''}
+                hasError={!!touched.methodName && !!errors.methodName}
+                error={errors.methodName || ''}
               />
 
               <Button

@@ -1,3 +1,6 @@
+import { Category } from './category';
+import { PaymentMethod } from './paymentMethod';
+
 export enum EntriesApiTag {
   Entries = 'Entries',
 }
@@ -21,9 +24,9 @@ export interface Entry {
   id: number;
   name: string;
   amount: number;
-  category: string;
+  category: Category;
   entryType: EntryType;
   frequency: EntryFrequency;
   dueDate: string;
-  paymentMethod: string;
+  paymentMethod: PaymentMethod;
 }

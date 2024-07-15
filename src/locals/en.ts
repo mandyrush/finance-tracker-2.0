@@ -7,6 +7,7 @@ const strings = {
     delete: 'Delete',
     dueDate: 'Due Date',
     edit: 'Edit',
+    error: 'There was an error, please refresh the page and try again.',
     frequency: 'Frequency',
     grandTotal: 'Grand Total',
     loading: 'Loading',

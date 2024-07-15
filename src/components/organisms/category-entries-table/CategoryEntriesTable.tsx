@@ -18,7 +18,7 @@ interface CategoryEntriesTableProps {
 const CategoryEntriesTable = ({ tableData }: CategoryEntriesTableProps) => {
   const categoryEntries = useCallback(
     (category: string) => {
-      return tableData.filter((entry) => entry.category === category);
+      return tableData.filter((entry) => entry.category.name === category);
     },
     [tableData]
   );
@@ -42,7 +42,12 @@ const CategoryEntriesTable = ({ tableData }: CategoryEntriesTableProps) => {
   }, [tableData]);
 
   const categories = useMemo(() => {
-    return Array.from(new Set(categoryArray));
+    return categoryArray.reduce((accumulator, current) => {
+      if (!accumulator.includes(current.name)) {
+        accumulator.push(current.name);
+      }
+      return accumulator;
+    }, [] as string[]);
   }, [categoryArray]);
 
   const sortedCategories = useMemo(() => {

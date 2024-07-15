@@ -1,4 +1,4 @@
-import BudgetOverview from '@/components/views/budget-overview/BudgetOverview';
+import BudgetOverview from '@/components/organisms/budget-overview/BudgetOverview';
 import strings from '@/locals/en';
 import { Grid, Flex, Box, Heading } from '@radix-ui/themes';
 import { MainContainer } from './styles';

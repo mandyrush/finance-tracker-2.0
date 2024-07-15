@@ -5,7 +5,11 @@ import { Card, Skeleton } from '@radix-ui/themes';
 import strings from '@/locals/en';
 
 const {
-  budget: { budget },
+  global: { error: globalError },
+  budget: {
+    budget,
+    emptyState: { message, description },
+  },
 } = strings;
 
 const BudgetOverview = () => {
@@ -14,7 +18,7 @@ const BudgetOverview = () => {
   if (error) {
     return (
       <Card>
-        <p>Oops, there was an error!</p>
+        <p>{globalError}</p>
       </Card>
     );
   }
@@ -26,10 +30,7 @@ const BudgetOverview = () => {
   return (
     <>
       {!data ? (
-        <EmptyState
-          message="No budget entries to show"
-          description="Please try again"
-        />
+        <EmptyState message={message} description={description} />
       ) : (
         <CategoriesWidget title={budget} entries={data} />
       )}

@@ -4,5 +4,5 @@ export enum PaymentMethodsApiTag {
 
 export interface PaymentMethod {
   id: number;
-  paymentMethod: string;
+  name: string;
 }

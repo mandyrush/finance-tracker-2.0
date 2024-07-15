@@ -1,5 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { Entry, EntryType, EntriesApiTag } from '@/models/entry';
+import {
+  Entry,
+  EntryType,
+  EntryFrequency,
+  EntriesApiTag,
+} from '@/models/entry';
 import { Category, CategoriesApiTag } from '@/models/category';
 import { PaymentMethod, PaymentMethodsApiTag } from '@/models/paymentMethod';
 
@@ -24,7 +29,17 @@ export const baseApi = createApi({
       query: () => 'payment-methods',
       providesTags: [PaymentMethodsApiTag.PaymentMethods],
     }),
-    createBudgetEntry: builder.mutation<void, Omit<Entry, 'id' | 'entryType'>>({
+    createBudgetEntry: builder.mutation<
+      void,
+      {
+        name: string;
+        amount: number;
+        category: string;
+        frequency: EntryFrequency;
+        dueDate: string;
+        paymentMethod: string;
+      }
+    >({
       query: ({
         name,
         amount,
@@ -47,22 +62,25 @@ export const baseApi = createApi({
       }),
       invalidatesTags: [EntriesApiTag.Entries],
     }),
-    createBudgetCategory: builder.mutation<void, Omit<Category, 'id'>>({
-      query: ({ category }) => ({
+    createBudgetCategory: builder.mutation<Category, Omit<Category, 'id'>>({
+      query: ({ name }) => ({
         url: 'budget-categories',
         method: 'POST',
         body: {
-          category,
+          name,
         },
       }),
       invalidatesTags: [CategoriesApiTag.Categories],
     }),
-    createPaymentMethod: builder.mutation<void, Omit<PaymentMethod, 'id'>>({
-      query: ({ paymentMethod }) => ({
+    createPaymentMethod: builder.mutation<
+      PaymentMethod,
+      Omit<PaymentMethod, 'id'>
+    >({
+      query: ({ name }) => ({
         url: 'payment-methods',
         method: 'POST',
         body: {
-          paymentMethod,
+          name,
         },
       }),
       invalidatesTags: [PaymentMethodsApiTag.PaymentMethods],

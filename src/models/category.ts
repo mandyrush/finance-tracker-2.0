@@ -4,5 +4,5 @@ export enum CategoriesApiTag {
 
 export interface Category {
   id: number;
-  category: string;
+  name: string;
 }

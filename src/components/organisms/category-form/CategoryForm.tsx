@@ -19,7 +19,7 @@ const {
 } = strings;
 
 interface FormValues {
-  category: string;
+  categoryName: string;
 }
 
 const CategoryForm = () => {
@@ -27,7 +27,7 @@ const CategoryForm = () => {
   const [createCategory, { isLoading }] = useCreateBudgetCategoryMutation();
 
   const initialValues: FormValues = {
-    category: '',
+    categoryName: '',
   };
 
   return (
@@ -40,7 +40,7 @@ const CategoryForm = () => {
         validationSchema={categoryValidationSchema(existingCategories)}
         onSubmit={async (values, { resetForm }) => {
           try {
-            await createCategory(values);
+            await createCategory({ name: values.categoryName });
             <AlertCallout
               message={createCategorySuccess}
               icon={<InfoCircledIcon />}
@@ -55,14 +55,14 @@ const CategoryForm = () => {
           <Form>
             <Flex direction="column" gap="3" maxWidth="300px">
               <TextInput
-                name="category"
+                name="categoryName"
                 label={name}
                 type="text"
-                value={values.category}
+                value={values.categoryName}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                hasError={!!touched.category && !!errors.category}
-                error={errors.category || ''}
+                hasError={!!touched.categoryName && !!errors.categoryName}
+                error={errors.categoryName || ''}
               />
 
               <Button

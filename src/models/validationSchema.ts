@@ -24,14 +24,16 @@ const {
 
 export const categoryValidationSchema = (existingCategories: Category[]) => {
   return object({
-    category: string()
+    categoryName: string()
       .max(30, mustBeThirtyCharacters)
       .required(categoryRequired)
       .test(
         'is unique',
         categoryExists,
-        (value) =>
-          existingCategories.findIndex((cat) => cat.category === value) === -1
+        (categoryName) =>
+          existingCategories.findIndex(
+            (category) => category.name === categoryName
+          ) === -1
       ),
   });
 };
@@ -49,15 +51,15 @@ export const paymentMethodValidationSchema = (
   existingPaymentMethods: PaymentMethod[]
 ) => {
   return object({
-    paymentMethod: string()
+    methodName: string()
       .max(30, mustBeThirtyCharacters)
       .required(paymentMethodRequired)
       .test(
         'is unique',
         paymentMethodExists,
-        (value) =>
+        (paymentMethod) =>
           existingPaymentMethods.findIndex(
-            (method) => method.paymentMethod === value
+            (method) => method.name === paymentMethod
           ) === -1
       ),
   });
