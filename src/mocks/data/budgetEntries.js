@@ -9,7 +9,7 @@ export const budgetEntries = [
       amount: 150.0,
       category: {
         id: 100,
-        name: 'car',
+        name: 'Car',
       },
       entryType: EntryType.Budget,
       frequency: EntryFrequency.Monthly,
@@ -28,7 +28,7 @@ export const budgetEntries = [
       amount: 345.72,
       category: {
         id: 100,
-        name: 'car',
+        name: 'Car',
       },
       entryType: EntryType.Budget,
       frequency: EntryFrequency.Monthly,
@@ -47,7 +47,7 @@ export const budgetEntries = [
       amount: 75.0,
       category: {
         id: 200,
-        name: 'technology',
+        name: 'Technology',
       },
       entryType: EntryType.Budget,
       frequency: EntryFrequency.Monthly,
@@ -66,7 +66,7 @@ export const budgetEntries = [
       amount: 70.0,
       category: {
         id: 300,
-        name: 'home',
+        name: 'Home',
       },
       entryType: EntryType.Budget,
       frequency: EntryFrequency.Monthly,
@@ -85,7 +85,7 @@ export const budgetEntries = [
       amount: 70.0,
       category: {
         id: 300,
-        name: 'home',
+        name: 'Home',
       },
       entryType: EntryType.Budget,
       frequency: EntryFrequency.Monthly,
@@ -104,7 +104,7 @@ export const budgetEntries = [
       amount: 1623.29,
       category: {
         id: 300,
-        name: 'home',
+        name: 'Home',
       },
       entryType: EntryType.Budget,
       frequency: EntryFrequency.Monthly,
@@ -123,7 +123,7 @@ export const budgetEntries = [
       amount: 95.0,
       category: {
         id: 300,
-        name: 'home',
+        name: 'Home',
       },
       entryType: EntryType.Budget,
       frequency: EntryFrequency.Monthly,
@@ -142,7 +142,7 @@ export const budgetEntries = [
       amount: 100.0,
       category: {
         id: 100,
-        name: 'car',
+        name: 'Car',
       },
       entryType: EntryType.Budget,
       frequency: EntryFrequency.Monthly,

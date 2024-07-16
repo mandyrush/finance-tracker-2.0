@@ -59,7 +59,7 @@ const ExpenseForm = () => {
     return categories.map((category) => {
       return {
         label: category.name,
-        value: category.id.toString(),
+        value: category.name,
       };
     });
   }, [categories]);
@@ -72,7 +72,7 @@ const ExpenseForm = () => {
     return paymentMethods.map((method) => {
       return {
         label: method.name,
-        value: method.id.toString(),
+        value: method.name,
       };
     });
   }, [paymentMethods]);
