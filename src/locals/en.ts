@@ -2,6 +2,7 @@ const strings = {
   global: {
     actions: 'Actions',
     amount: 'Amount',
+    cancel: 'Cancel',
     category: 'Category',
     dashboard: 'Dashboard',
     delete: 'Delete',
@@ -24,6 +25,10 @@ const strings = {
     addPaymentMethod: 'Add Payment Method',
     budget: 'Budget',
     budgetDetail: 'Budget Detail',
+    actions: {
+      deleteEntryConfirmation:
+        'Are you sure you want to delete this budget entry?',
+    },
     callouts: {
       createBudgetEntryFailure:
         'Failed to create budget entry. Please refresh the page and try again.',

@@ -85,6 +85,13 @@ export const baseApi = createApi({
       }),
       invalidatesTags: [PaymentMethodsApiTag.PaymentMethods],
     }),
+    deleteBudgetEntry: builder.mutation<void, { id: number }>({
+      query: ({ id }) => ({
+        url: `budget-entries/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: [EntriesApiTag.Entries],
+    }),
   }),
 });
 
@@ -95,4 +102,5 @@ export const {
   useCreateBudgetEntryMutation,
   useCreateBudgetCategoryMutation,
   useCreatePaymentMethodMutation,
+  useDeleteBudgetEntryMutation,
 } = baseApi;

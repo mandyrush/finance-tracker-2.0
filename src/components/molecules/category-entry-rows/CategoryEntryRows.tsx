@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { Entry } from '@/models/entry';
 import { capitalizeFirstLetter, formatToCurrency } from '@/utilities/helpers';
 import strings from '@/locals/en';
+import DeleteBudgetEntryDialog from '../delete-budget-entry-dialog/DeleteBudgetEntryDialog';
 import {
   Table,
   Strong,
@@ -26,6 +28,14 @@ const CategoryEntryRows = ({
   entries,
   entriesTotal,
 }: CategoryEntryRowsProps) => {
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [selectedEntryId, setSelectedEntryId] = useState<number | undefined>();
+
+  const handleConfirmDelete = (id: number) => {
+    setSelectedEntryId(id);
+    setShowDeleteDialog(true);
+  };
+
   return (
     <>
       <Table.Row>
@@ -49,7 +59,7 @@ const CategoryEntryRows = ({
               </Flex>
               <DropdownMenu.Content>
                 <DropdownMenu.Item onClick={() => {}}>{edit}</DropdownMenu.Item>
-                <DropdownMenu.Item onClick={() => {}}>
+                <DropdownMenu.Item onClick={() => handleConfirmDelete(id)}>
                   {deleteButton}
                 </DropdownMenu.Item>
               </DropdownMenu.Content>
@@ -66,6 +76,12 @@ const CategoryEntryRows = ({
           <Strong>{entriesTotal}</Strong>
         </Table.Cell>
       </Table.Row>
+
+      <DeleteBudgetEntryDialog
+        show={showDeleteDialog}
+        handleOpenChange={() => setShowDeleteDialog(!showDeleteDialog)}
+        selectedId={selectedEntryId}
+      />
     </>
   );
 };
