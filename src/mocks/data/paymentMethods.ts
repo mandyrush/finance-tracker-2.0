@@ -1,4 +1,4 @@
-export const paymentMethods = [
+export const paymentMethods: [number, { id: number; name: string }][] = [
   [
     600,
     {

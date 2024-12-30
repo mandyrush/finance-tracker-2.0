@@ -1,6 +1,18 @@
 import { EntryType, EntryFrequency } from '@/models/entry';
 
-export const budgetEntries = [
+export const budgetEntries: [
+  number,
+  {
+    id: number;
+    name: string;
+    amount: number;
+    category: { id: number; name: string };
+    entryType: EntryType;
+    frequency: EntryFrequency;
+    dueDate: string;
+    paymentMethod: { id: number; name: string };
+  }
+][] = [
   [
     2001,
     {

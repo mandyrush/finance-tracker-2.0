@@ -1,28 +1,7 @@
 import { http, HttpResponse } from 'msw';
+import { budgetCategories } from '../data/budgetCategories';
 
-const allCategories = new Map([
-  [
-    100,
-    {
-      id: 100,
-      name: 'Car',
-    },
-  ],
-  [
-    200,
-    {
-      id: 200,
-      name: 'Technology',
-    },
-  ],
-  [
-    300,
-    {
-      id: 300,
-      name: 'Home',
-    },
-  ],
-]);
+const allCategories = new Map(budgetCategories);
 
 export const handlers = [
   http.get('/budget-categories', () => {

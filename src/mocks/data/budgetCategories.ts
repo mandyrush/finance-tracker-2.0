@@ -1,4 +1,4 @@
-export const budgetCategories = [
+export const budgetCategories: [number, { id: number; name: string }][] = [
   [
     100,
     {
