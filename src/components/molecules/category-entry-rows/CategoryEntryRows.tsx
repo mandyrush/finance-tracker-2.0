@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Entry } from '@/models/entry';
 import { capitalizeFirstLetter, formatToCurrency } from '@/utilities/helpers';
 import strings from '@/locals/en';
+import EditBudgetEntryDialog from '../edit-budget-entry-dialog/EditBudgetEntryDialog';
 import DeleteBudgetEntryDialog from '../delete-budget-entry-dialog/DeleteBudgetEntryDialog';
 import {
   Table,
@@ -28,8 +29,32 @@ const CategoryEntryRows = ({
   entries,
   entriesTotal,
 }: CategoryEntryRowsProps) => {
+  const [showEditDialog, setShowEditDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [selectedEntryId, setSelectedEntryId] = useState<number | undefined>();
+
+  const handleEditOpenChange = () => {
+    if (showEditDialog) {
+      setShowEditDialog(false);
+      setSelectedEntryId(undefined);
+    } else {
+      setShowEditDialog(true);
+    }
+  };
+
+  const handleDeleteOpenChange = () => {
+    if (showDeleteDialog) {
+      setShowDeleteDialog(false);
+      setSelectedEntryId(undefined);
+    } else {
+      setShowDeleteDialog(true);
+    }
+  };
+
+  const handleEdit = (id: number) => {
+    setSelectedEntryId(id);
+    setShowEditDialog(true);
+  };
 
   const handleConfirmDelete = (id: number) => {
     setSelectedEntryId(id);
@@ -58,7 +83,9 @@ const CategoryEntryRows = ({
                 </DropdownMenu.Trigger>
               </Flex>
               <DropdownMenu.Content>
-                <DropdownMenu.Item onClick={() => {}}>{edit}</DropdownMenu.Item>
+                <DropdownMenu.Item onClick={() => handleEdit(id)}>
+                  {edit}
+                </DropdownMenu.Item>
                 <DropdownMenu.Item onClick={() => handleConfirmDelete(id)}>
                   {deleteButton}
                 </DropdownMenu.Item>
@@ -77,11 +104,22 @@ const CategoryEntryRows = ({
         </Table.Cell>
       </Table.Row>
 
-      <DeleteBudgetEntryDialog
-        show={showDeleteDialog}
-        handleOpenChange={() => setShowDeleteDialog(!showDeleteDialog)}
-        selectedId={selectedEntryId}
-      />
+      {/* @TODO - add error dialog if the selectedEntryId is not found */}
+      {!selectedEntryId ? null : (
+        <>
+          <DeleteBudgetEntryDialog
+            show={showDeleteDialog}
+            handleOpenChange={handleDeleteOpenChange}
+            selectedId={selectedEntryId}
+          />
+
+          <EditBudgetEntryDialog
+            show={showEditDialog}
+            handleOpenChange={handleEditOpenChange}
+            selectedId={selectedEntryId}
+          />
+        </>
+      )}
     </>
   );
 };

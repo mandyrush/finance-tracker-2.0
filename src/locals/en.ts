@@ -25,9 +25,11 @@ const strings = {
     addPaymentMethod: 'Add Payment Method',
     budget: 'Budget',
     budgetDetail: 'Budget Detail',
+    editExpense: 'Edit Expense',
     actions: {
       deleteEntryConfirmation:
         'Are you sure you want to delete this budget entry?',
+      editBudgetEntryDescription: 'Edit the budget entry details.',
     },
     callouts: {
       createBudgetEntryFailure:
@@ -41,6 +43,9 @@ const strings = {
       createPaymentMethodSuccess: 'Payment method created.',
       fetchBudgetDetailFail:
         'Failed to load the budget details, please refresh the page and try again.',
+      updateBudgetEntryFailure:
+        'Failed to update budget entry. Please refresh the page and try again.',
+      updateBudgetEntrySuccess: 'Budget entry updated.',
     },
     emptyState: {
       description: 'Create a new budget entry to get started.',

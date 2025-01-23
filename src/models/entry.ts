@@ -3,6 +3,7 @@ import { PaymentMethod } from './paymentMethod';
 
 export enum EntriesApiTag {
   Entries = 'Entries',
+  Entry = 'Entry',
 }
 
 export enum EntryType {

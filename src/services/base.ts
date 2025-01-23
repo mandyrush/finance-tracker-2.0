@@ -13,6 +13,7 @@ export const baseApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5173' }),
   tagTypes: [
     EntriesApiTag.Entries,
+    EntriesApiTag.Entry,
     CategoriesApiTag.Categories,
     PaymentMethodsApiTag.PaymentMethods,
   ],
@@ -28,6 +29,10 @@ export const baseApi = createApi({
     getPaymentMethods: builder.query<PaymentMethod[], void>({
       query: () => 'payment-methods',
       providesTags: [PaymentMethodsApiTag.PaymentMethods],
+    }),
+    getBudgetEntry: builder.query<Entry, number>({
+      query: (id) => `budget-entries/${id}`,
+      providesTags: (result, error, id) => [{ type: EntriesApiTag.Entry, id }],
     }),
     createBudgetEntry: builder.mutation<
       void,
@@ -61,6 +66,45 @@ export const baseApi = createApi({
         },
       }),
       invalidatesTags: [EntriesApiTag.Entries],
+    }),
+    updateBudgetEntry: builder.mutation<
+      void,
+      {
+        id: number;
+        name: string;
+        amount: number;
+        category: string;
+        frequency: EntryFrequency;
+        dueDate: string;
+        paymentMethod: string;
+      }
+    >({
+      query: ({
+        id,
+        name,
+        amount,
+        category,
+        frequency,
+        dueDate,
+        paymentMethod,
+      }) => ({
+        url: `budget-entries/${id}`,
+        method: 'PUT',
+        body: {
+          id,
+          name,
+          amount,
+          category,
+          entryType: EntryType.Budget,
+          frequency,
+          dueDate,
+          paymentMethod,
+        },
+      }),
+      invalidatesTags: (result, error, arg) => [
+        { type: EntriesApiTag.Entries },
+        { type: EntriesApiTag.Entry, id: arg.id },
+      ],
     }),
     createBudgetCategory: builder.mutation<Category, Omit<Category, 'id'>>({
       query: ({ name }) => ({
@@ -97,9 +141,11 @@ export const baseApi = createApi({
 
 export const {
   useGetBudgetEntriesQuery,
+  useGetBudgetEntryQuery,
   useGetBudgetCategoriesQuery,
   useGetPaymentMethodsQuery,
   useCreateBudgetEntryMutation,
+  useUpdateBudgetEntryMutation,
   useCreateBudgetCategoryMutation,
   useCreatePaymentMethodMutation,
   useDeleteBudgetEntryMutation,

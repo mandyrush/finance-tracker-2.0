@@ -12,7 +12,7 @@ const {
 interface DeleteBudgetEntryDialogProps {
   show: boolean;
   handleOpenChange: () => void;
-  selectedId?: number;
+  selectedId: number;
 }
 
 const DeleteBudgetEntryDialog = ({
@@ -23,7 +23,6 @@ const DeleteBudgetEntryDialog = ({
   const [deleteEntry, { isLoading }] = useDeleteBudgetEntryMutation();
 
   const handleDeleteEntry = async () => {
-    if (!selectedId) return;
     try {
       await deleteEntry({ id: selectedId });
       // @TODO - show success toast

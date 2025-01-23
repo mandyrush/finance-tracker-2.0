@@ -1,22 +1,24 @@
 import { useMemo } from 'react';
 import { Formik, Form } from 'formik';
-import { EntryFrequency } from '@/models/entry';
+import { EntryFrequency, Entry } from '@/models/entry';
 import { expenseFormValidationSchema } from '@/models/validationSchema';
 import {
   useGetBudgetCategoriesQuery,
   useGetPaymentMethodsQuery,
   useCreateBudgetEntryMutation,
+  useUpdateBudgetEntryMutation,
 } from '@/services/base';
 import TextInput from '@/components/molecules/text-input/TextInput';
 import SelectInput from '@/components/molecules/select-input/SelectInput';
 import AlertCallout from '@components/atoms/alert-callout/AlertCallout';
 import { InfoCircledIcon } from '@radix-ui/react-icons';
-import { Card, Heading, Flex, Button } from '@radix-ui/themes';
+import { Heading, Flex, Button } from '@radix-ui/themes';
 import strings from '@/locals/en';
 
 const {
   global: {
     amount,
+    cancel,
     category,
     dueDate,
     frequency,
@@ -27,7 +29,13 @@ const {
   },
   budget: {
     addExpense,
-    callouts: { createBudgetEntryFailure, createBudgetEntrySuccess },
+    editExpense,
+    callouts: {
+      createBudgetEntryFailure,
+      createBudgetEntrySuccess,
+      updateBudgetEntryFailure,
+      updateBudgetEntrySuccess,
+    },
   },
 } = strings;
 
@@ -40,7 +48,12 @@ interface FormValues {
   paymentMethod: string;
 }
 
-const ExpenseForm = () => {
+interface ExpenseFormProps {
+  expense?: Entry;
+  handleDialogClose?: () => void;
+}
+
+const ExpenseForm = ({ expense, handleDialogClose }: ExpenseFormProps) => {
   const {
     data: categories = [],
     // error: isGetCategoriesError,
@@ -53,7 +66,10 @@ const ExpenseForm = () => {
     isLoading: isPaymentMethodsLoading,
   } = useGetPaymentMethodsQuery();
 
-  const [createEntry, { isLoading }] = useCreateBudgetEntryMutation();
+  const [createEntry, { isLoading: isCreateBudgetEntryLoading }] =
+    useCreateBudgetEntryMutation();
+  const [updateEntry, { isLoading: isUpdateBudgetEntryLoading }] =
+    useUpdateBudgetEntryMutation();
 
   const categoryOptions = useMemo(() => {
     return categories.map((category) => {
@@ -65,7 +81,7 @@ const ExpenseForm = () => {
   }, [categories]);
 
   const frequencyOptions = Object.entries(EntryFrequency).map(
-    ([key, value]) => ({ label: key, value: value.toLowerCase() })
+    ([key, value]) => ({ label: key, value: value })
   );
 
   const paymentMethodOptions = useMemo(() => {
@@ -90,24 +106,38 @@ const ExpenseForm = () => {
   }, [paymentMethodOptions]);
 
   const initialValues: FormValues = {
-    name: '',
-    amount: 0.0,
-    category: '',
-    frequency: EntryFrequency.Monthly,
-    dueDate: '',
-    paymentMethod: '',
+    name: expense?.name || '',
+    amount: expense?.amount || 0.0,
+    category: expense?.category?.name || '',
+    frequency: EntryFrequency[expense?.frequency || 'Monthly'],
+    dueDate: expense?.dueDate || '',
+    paymentMethod: expense?.paymentMethod?.name || '',
   };
 
   return (
-    <Card>
+    <>
       <Heading as="h2" size="3">
-        {addExpense}
+        {expense ? editExpense : addExpense}
       </Heading>
 
       <Formik
         initialValues={initialValues}
         validationSchema={expenseFormValidationSchema}
         onSubmit={async (values, { resetForm }) => {
+          if (expense) {
+            try {
+              await updateEntry({ id: expense.id, ...values });
+              <AlertCallout
+                message={updateBudgetEntrySuccess}
+                icon={<InfoCircledIcon />}
+              />;
+              handleDialogClose?.();
+            } catch (e) {
+              <AlertCallout message={updateBudgetEntryFailure} />;
+            }
+            return;
+          }
+
           try {
             await createEntry(values);
             <AlertCallout
@@ -129,7 +159,7 @@ const ExpenseForm = () => {
           handleBlur,
         }) => (
           <Form>
-            <Flex direction="column" gap="3" maxWidth="300px">
+            <Flex direction="column" gap="3">
               <TextInput
                 name="name"
                 label={name}
@@ -203,21 +233,42 @@ const ExpenseForm = () => {
                 hasError={!!touched.paymentMethod && !!errors.paymentMethod}
                 error={errors.paymentMethod || ''}
               />
+              {expense ? (
+                <Flex gap="3" mt="4" justify="end">
+                  <Button
+                    type="submit"
+                    variant="solid"
+                    radius="large"
+                    color="grass"
+                    loading={
+                      isCreateBudgetEntryLoading || isUpdateBudgetEntryLoading
+                    }
+                  >
+                    {save}
+                  </Button>
 
-              <Button
-                type="submit"
-                variant="solid"
-                radius="large"
-                color="grass"
-                loading={isLoading}
-              >
-                {save}
-              </Button>
+                  <Button variant="soft" color="gray">
+                    {cancel}
+                  </Button>
+                </Flex>
+              ) : (
+                <Button
+                  type="submit"
+                  variant="solid"
+                  radius="large"
+                  color="grass"
+                  loading={
+                    isCreateBudgetEntryLoading || isUpdateBudgetEntryLoading
+                  }
+                >
+                  {save}
+                </Button>
+              )}
             </Flex>
           </Form>
         )}
       </Formik>
-    </Card>
+    </>
   );
 };
 

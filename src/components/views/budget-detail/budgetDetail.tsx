@@ -6,7 +6,7 @@ import PaymentMethodForm from '@/components/organisms/payment-method-form/Paymen
 import EmptyState from '@/components/atoms/empty-state/EmptyState';
 import Loader from '@/components/atoms/loader/Loader';
 import AlertCallout from '@components/atoms/alert-callout/AlertCallout';
-import { Container, Flex, Box, Heading } from '@radix-ui/themes';
+import { Container, Card, Flex, Box, Heading } from '@radix-ui/themes';
 import strings from '@/locals/en';
 
 const {
@@ -39,7 +39,9 @@ const BudgetDetail = () => {
           <Box width="450px">
             <Flex direction="column" gap="6">
               <Box>
-                <ExpenseForm />
+                <Card>
+                  <ExpenseForm />
+                </Card>
               </Box>
 
               <Box>
