@@ -37,10 +37,10 @@ const CategoriesWidget = ({ title, entries }: CategoriesWidgetProps) => {
         accumulator.push({
           id: current.id,
           label: current.category.name,
-          value: current.amount,
+          value: Number(current.amount),
         });
       } else {
-        accumulator[categoryIndex].value += current.amount;
+        accumulator[categoryIndex].value += Number(current.amount);
       }
       return accumulator;
     }, [] as WidgetEntry[]);

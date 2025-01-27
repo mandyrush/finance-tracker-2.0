@@ -41,7 +41,7 @@ const {
 
 interface FormValues {
   name: string;
-  amount: number;
+  amount: string;
   category: string;
   frequency: EntryFrequency;
   dueDate: string;
@@ -105,9 +105,17 @@ const ExpenseForm = ({ expense, handleDialogClose }: ExpenseFormProps) => {
     );
   }, [paymentMethodOptions]);
 
+  const formattedAmount = () => {
+    const initialAmount = 0;
+    if (expense) {
+      return Number(expense.amount).toFixed(2);
+    }
+    return initialAmount.toFixed(2);
+  };
+
   const initialValues: FormValues = {
     name: expense?.name || '',
-    amount: expense?.amount || 0.0,
+    amount: formattedAmount(),
     category: expense?.category?.name || '',
     frequency: EntryFrequency[expense?.frequency || 'Monthly'],
     dueDate: expense?.dueDate || '',
@@ -174,7 +182,7 @@ const ExpenseForm = ({ expense, handleDialogClose }: ExpenseFormProps) => {
               <TextInput
                 name="amount"
                 label={amount}
-                type="number"
+                type="text"
                 value={values.amount}
                 onChange={handleChange}
                 onBlur={handleBlur}

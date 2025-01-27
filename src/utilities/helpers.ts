@@ -3,10 +3,10 @@ export const capitalizeFirstLetter = (string: string) => {
 };
 
 export const formatToCurrency = (number: number) => {
-  const USDollar = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
+  const USDollar = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(number);
 
-  return USDollar.format(number);
+  return USDollar;
 };

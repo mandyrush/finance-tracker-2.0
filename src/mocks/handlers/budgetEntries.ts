@@ -4,7 +4,7 @@ import { budgetEntries } from '../data/budgetEntries';
 
 interface budgetEntryProps {
   name: string;
-  amount: number;
+  amount: string;
   category: string;
   frequency: EntryFrequency;
   dueDate: string;

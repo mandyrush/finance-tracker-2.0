@@ -25,7 +25,7 @@ const CategoryEntriesTable = ({ tableData }: CategoryEntriesTableProps) => {
 
   const sumEntries = useCallback((entries: Entry[]) => {
     const total = entries?.reduce(
-      (accumulator, current) => accumulator + current.amount,
+      (accumulator, current) => accumulator + Number(current.amount),
       0
     );
     return formatToCurrency(total);

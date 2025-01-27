@@ -38,7 +38,7 @@ export const baseApi = createApi({
       void,
       {
         name: string;
-        amount: number;
+        amount: string;
         category: string;
         frequency: EntryFrequency;
         dueDate: string;
@@ -72,7 +72,7 @@ export const baseApi = createApi({
       {
         id: number;
         name: string;
-        amount: number;
+        amount: string;
         category: string;
         frequency: EntryFrequency;
         dueDate: string;

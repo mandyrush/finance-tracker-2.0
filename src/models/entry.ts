@@ -24,7 +24,7 @@ export enum EntryFrequency {
 export interface Entry {
   id: number;
   name: string;
-  amount: number;
+  amount: string;
   category: Category;
   entryType: EntryType;
   frequency: EntryFrequency;

@@ -1,16 +1,18 @@
 import { EntryType, EntryFrequency } from '@/models/entry';
+import { Category } from '@/models/category';
+import { PaymentMethod } from '@/models/paymentMethod';
 
 export const budgetEntries: [
   number,
   {
     id: number;
     name: string;
-    amount: number;
-    category: { id: number; name: string };
+    amount: string;
+    category: Category;
     entryType: EntryType;
     frequency: EntryFrequency;
     dueDate: string;
-    paymentMethod: { id: number; name: string };
+    paymentMethod: PaymentMethod;
   }
 ][] = [
   [
@@ -18,7 +20,7 @@ export const budgetEntries: [
     {
       id: 2001,
       name: 'Car Insurance',
-      amount: 150.0,
+      amount: '150.00',
       category: {
         id: 100,
         name: 'Car',
@@ -37,7 +39,7 @@ export const budgetEntries: [
     {
       id: 2002,
       name: 'Truck Loan',
-      amount: 345.72,
+      amount: '345.72',
       category: {
         id: 100,
         name: 'Car',
@@ -56,7 +58,7 @@ export const budgetEntries: [
     {
       id: 2003,
       name: 'Internet',
-      amount: 75.0,
+      amount: '75.00',
       category: {
         id: 200,
         name: 'Technology',
@@ -75,7 +77,7 @@ export const budgetEntries: [
     {
       id: 2004,
       name: 'Public Utilities',
-      amount: 70.0,
+      amount: '70.00',
       category: {
         id: 300,
         name: 'Home',
@@ -94,7 +96,7 @@ export const budgetEntries: [
     {
       id: 2005,
       name: 'Northwestern Energy',
-      amount: 70.0,
+      amount: '70.00',
       category: {
         id: 300,
         name: 'Home',
@@ -113,7 +115,7 @@ export const budgetEntries: [
     {
       id: 2006,
       name: 'Mortgage',
-      amount: 1623.29,
+      amount: '1623.29',
       category: {
         id: 300,
         name: 'Home',
@@ -132,7 +134,7 @@ export const budgetEntries: [
     {
       id: 2007,
       name: 'MDU',
-      amount: 95.0,
+      amount: '95.00',
       category: {
         id: 300,
         name: 'Home',
@@ -151,7 +153,7 @@ export const budgetEntries: [
     {
       id: 2008,
       name: 'Gas',
-      amount: 100.0,
+      amount: '100.00',
       category: {
         id: 100,
         name: 'Car',

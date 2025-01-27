@@ -1,4 +1,5 @@
-import { EntryContainer, EntryLabel, EntryValue } from "./styles";
+import { EntryContainer, EntryLabel, EntryValue } from './styles';
+import { formatToCurrency } from '@/utilities/helpers';
 
 interface EntryProps {
   label: string;
@@ -9,7 +10,7 @@ const Entry = ({ label, value }: EntryProps) => {
   return (
     <EntryContainer>
       <EntryLabel>{label}</EntryLabel>
-      <EntryValue>${value}</EntryValue>
+      <EntryValue>{formatToCurrency(value)}</EntryValue>
     </EntryContainer>
   );
 };
