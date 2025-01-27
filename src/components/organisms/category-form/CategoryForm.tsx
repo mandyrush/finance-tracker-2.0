@@ -41,6 +41,7 @@ const CategoryForm = () => {
         onSubmit={async (values, { resetForm }) => {
           try {
             await createCategory({ name: values.categoryName });
+            // @TODO - move AlertCallout to context
             <AlertCallout
               message={createCategorySuccess}
               icon={<InfoCircledIcon />}

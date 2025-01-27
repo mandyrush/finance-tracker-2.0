@@ -22,7 +22,6 @@ const BudgetDetail = () => {
 
   return (
     <>
-      {/* @TODO - move the error callout to a centralized location */}
       {error && <AlertCallout message={fetchBudgetDetailFail} />}
       <Container pt="6" pb="6">
         <Heading as="h1">{budgetDetail}</Heading>

@@ -72,7 +72,9 @@ const CategoryEntryRows = ({
       {entries?.map(({ id, name, amount }) => (
         <Table.Row key={id}>
           <Table.RowHeaderCell>{name}</Table.RowHeaderCell>
-          <Table.Cell justify="end">{formatToCurrency(amount)}</Table.Cell>
+          <Table.Cell justify="end">
+            {formatToCurrency(Number(amount))}
+          </Table.Cell>
           <Table.Cell justify="center">
             <DropdownMenu.Root>
               <Flex height="100%" align="center" justify="center">
